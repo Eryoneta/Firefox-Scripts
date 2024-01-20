@@ -1,7 +1,13 @@
 // ==UserScript==
-// @name           MultiRowTabs
+// @name           Tabs: MultiRowTabs
 // @version        1.0
-// @description    Baseado em: https://github.com/Izheil/Quantum-Nox-Firefox-Dark-Full-Theme/blob/master/Multirow and other functions/Multirow tabs/MultiRowTab-scrollable.uc.js
+// @long-description
+// @description
+/*
+	Baseado em: https://github.com/Izheil/Quantum-Nox-Firefox-Dark-Full-Theme/blob/master/Multirow%20and%20other%20functions/Multirow%20tabs/MultiRowTab-scrollable.uc.js
+	Implementa abas em multilinhas! Abas podem ser livremente arrastadas e reordenadas!
+	Ótimo para se ter várias abas abertas
+*/
 // @include        chrome://browser/content/browser.xhtml
 // ==/UserScript==
 

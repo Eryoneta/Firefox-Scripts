@@ -1,7 +1,12 @@
 // ==UserScript==
 // @name           App-Menu: Toggle ExporHTML
 // @version        1.0
-// @description    Adiciona botão para configurar export de HTML de favoritos
+// @long-description
+// @description
+/*
+	Adiciona botão para configurar export de HTML de favoritos
+	Bom para não exportar desnecessariamente, com cada reinicio
+*/
 // ==/UserScript==
 
 (function() {
@@ -49,8 +54,8 @@
 	} else {
 		let delayedListener = (subject, topic) => {
 			if (topic == "browser-delayed-startup-finished" && subject == window) {
-			Services.obs.removeObserver(delayedListener, topic);
-			init();
+				Services.obs.removeObserver(delayedListener, topic);
+				init();
 			}
 		};
 		Services.obs.addObserver(

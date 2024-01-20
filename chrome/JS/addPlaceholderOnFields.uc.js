@@ -1,7 +1,12 @@
 // ==UserScript==
-// @name           FieldsPlaceholder
+// @name           Edit-Bookmark: Fields Placeholder
 // @version        1.0
-// @description    Adiciona texto nos campos de Location, Keyword
+// @long-description
+// @description
+/*
+	Adiciona texto nos campos de Name, Location, Keyword, e Tags
+	Ajuda a entender o que os campos são(Sem as labels)
+*/
 // @include        *
 // ==/UserScript==
 
