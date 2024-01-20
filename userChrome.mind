@@ -1,0 +1,46 @@
+<mind fontName="Courier New" fontSize="12" fontStyle="0">	<mod border="0" color="FFBF38" icons="" title="userChrome" x="-133" y="37">		<text>+ userChrome:&#13;
+- Modificações feitas em ´Firefox´.&#13;
+</text>	</mod>	<mod border="0" color="FFBF38" icons="" title="Commit" x="-123" y="37">		<text/>	</mod>	<mod border="0" color="FFBF38" icons="" title="UserChromeJS" x="-133" y="42">		<text/>	</mod>	<mod border="0" color="FFBF38" icons="" title="UserChromeCSS" x="-134" y="32">		<text/>	</mod>	<mod border="0" color="FFDE99" icons="" title="MultiRowTabs.uc.js" x="-128" y="54">		<text/>	</mod>	<mod border="0" color="FFDE99" icons="" title="showScrollbarInMenus.uc.js" x="-128" y="48">		<text/>	</mod>	<mod border="0" color="FFDE99" icons="" title="addPlaceholderOnFields.uc.js" x="-128" y="51">		<text/>	</mod>	<mod border="0" color="FFDE99" icons="" title="addAutoExportHTMLToggler.uc.js" x="-128" y="45">		<text/>	</mod>	<mod border="0" color="FFDE99" icons="" title="States" x="-87" y="48">		<text/>	</mod>	<mod border="0" color="FFFFFF" icons="" title="DEFAULT()" x="-88" y="53">		<text>+ DEFAULT():&#13;
+- Nada ocorrendo.&#13;
+- Nenhum timer deve estar ocorrendo!&#13;
+. `clearTimeout(openTimer);`.&#13;
+. `clearTimeout(closeTimer);`.&#13;
+</text>	</mod>	<mod border="0" color="DCDCDC" icons="" title="OPEN_POPUP(popupElem)" x="-111" y="63">		<text>+ OPEN_POPUP(popupElem):&#13;
+- Um popup foi aberto.&#13;
+- Nenhum timer deve estar ocorrendo!&#13;
+. `clearTimeout(openTimer);`.&#13;
+. `clearTimeout(closeTimer);`.&#13;
+</text>	</mod>	<mod border="0" color="646464" icons="" title="DRAGGING_ITEM(popupElem)" x="-95" y="75">		<text>+ DRAGGING_ITEM(popupElem):&#13;
+- Um item está sendo arrastado para o popup.&#13;
+- Nenhum timer deve estar ocorrendo!&#13;
+. `clearTimeout(openTimer);`.&#13;
+. `clearTimeout(closeTimer);`.&#13;
+</text>	</mod>	<mod border="0" color="FFFFFF" icons="" title="onPopupShowing(event)" x="-80" y="53">		<text>+ onPopupShowing(event):&#13;
+- Um popup é aberto.&#13;
+- `setState(OPEN_POPUP, event.target);`.&#13;
+</text>	</mod>	<mod border="0" color="DCDCDC" icons="" title="onDragOverMenu(event)" x="-95" y="62">		<text>+ onDragOverMenu(event):&#13;
+- Um item está sendo arrastado!&#13;
+- `setState(DRAGGING_ITEM, popupElem);`.&#13;
+</text>	</mod>	<mod border="0" color="DCDCDC" icons="" title="onThisPopupHiding(event)" x="-95" y="65">		<text>+ onThisPopupHiding(event):&#13;
+- Nada ocorre.&#13;
+- `setState(DEFAULT);`.&#13;
+</text>	</mod>	<mod border="0" color="646464" icons="" title="onDragOverThisPopup(event)" x="-78" y="72">		<text>+ onDragOverThisPopup(event):&#13;
+- O item é arrastado para o popup! Nenhuma ação é mais necessária.&#13;
+- `setState(DEFAULT);`.&#13;
+</text>	</mod>	<mod border="0" color="646464" icons="" title="onPopupShowing(event)" x="-78" y="75">		<text>+ onPopupShowing(event):&#13;
+- Um outro popup é chamado para aparecer! Interromper, adicionando delay.&#13;
+- Se houver outro popup a aparecer, o anterior é desconsiderado, e este é quem recebe o delay para aparecer.&#13;
+. `clearTimeout(openTimer);`.&#13;
+</text>	</mod>	<mod border="0" color="646464" icons="" title="onThisPopupHiding(event)" x="-78" y="78">		<text>+ onThisPopupHiding(event):&#13;
+- O popup irá sumir! Interromper, adicionando delay.&#13;
+</text>	</mod>	<mod border="0" color="646464" icons="" title="openTimer" x="-62" y="75">		<text>+ openTimer:&#13;
+- Delay antes de abrir outro popup.&#13;
+- `popupElem.hidePopup();`.&#13;
+- `newPopupElem.openPopup();`.&#13;
+- `setState(OPEN_POPUP, newPopupElem);`.&#13;
+</text>	</mod>	<mod border="0" color="646464" icons="" title="closeTimer" x="-61" y="78">		<text>+ closeTimer:&#13;
+- Delay antes de fechar popup.&#13;
+- `popupElem.hidePopup();`.&#13;
+- `setState(DEFAULT);`.&#13;
+</text>	</mod>	<cox border="0" pai="0" son="1" width="2">		<text/>	</cox>	<cox border="0" pai="0" son="2" width="3">		<text/>	</cox>	<cox border="0" pai="0" son="3" width="3">		<text/>	</cox>	<cox border="0" pai="2" son="4" width="0">		<text/>		<nod x="-129" y="55"/>	</cox>	<cox border="0" pai="2" son="5" width="0">		<text/>		<nod x="-129" y="49"/>	</cox>	<cox border="0" pai="2" son="6" width="0">		<text/>		<nod x="-129" y="52"/>	</cox>	<cox border="0" pai="2" son="7" width="0">		<text/>		<nod x="-129" y="46"/>	</cox>	<cox border="0" pai="5" son="8" width="0">		<text/>	</cox>	<cox border="0" pai="8" son="9" width="0">		<text/>	</cox>	<cox border="0" pai="9" son="12" width="0">		<text/>	</cox>	<cox border="0" pai="14" son="9" width="0">		<text/>	</cox>	<cox border="0" pai="15" son="9" width="0">		<text/>	</cox>	<cox border="0" pai="19" son="9" width="0">		<text/>	</cox>	<cox border="0" pai="12" son="10" width="0">		<text/>	</cox>	<cox border="0" pai="10" son="13" width="0">		<text/>	</cox>	<cox border="0" pai="10" son="14" width="0">		<text/>	</cox>	<cox border="0" pai="18" son="10" width="0">		<text/>	</cox>	<cox border="0" pai="13" son="11" width="0">		<text/>	</cox>	<cox border="0" pai="11" son="15" width="0">		<text/>	</cox>	<cox border="0" pai="11" son="16" width="0">		<text/>	</cox>	<cox border="0" pai="11" son="17" width="0">		<text/>	</cox>	<cox border="0" pai="16" son="18" width="0">		<text/>	</cox>	<cox border="0" pai="17" son="19" width="0">		<text/>	</cox>
+</mind>
