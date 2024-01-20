@@ -1,0 +1,352 @@
+/* Modo Debug da Interface:
+    Em Develop Console, ativar debug remoto e debug do chrome
+    Ctrl + Alt + Shift + I = Ativa o painel de debug da interface!
+*/
+
+/* Window */
+
+    /* Icones de Menus */
+    @import url("menuIcons.css");
+
+    /* Vars */
+    :root {
+        --aesthetic-color: #00BFFF;
+    }
+
+    /* Window: Remove o menu que lista todas as tabs */
+    /* Salva espaço */
+    #alltabs-button {
+        display: none !important;
+    }
+
+    /* Window: Remove o texto indicando "Navegação privada" */
+    /* Salva espaço */
+    #private-browsing-indicator-with-label > label {
+        display: none;
+    }
+
+    /* Window: Ajusta os campos de texto de favoritos */
+    /* Conveniente! */
+    #placesView #editBookmarkPanelContent {
+        grid-template-columns: 1fr !important; /* Tudo em uma 1 coluna */
+    }
+    #editBookmarkPanelContent .caption-label {
+        display: none !important; /* Textos são escondidos */
+    }
+    #editBMPanel_keywordField {
+        margin-top: 10px !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='300px'><text x='5' y='15' fill='gray' font-size='12' font-family='Segoe UI'>Palavra-chave para abrir favoritos da barra de endereços</text></svg>");
+        background-repeat: no-repeat; /* Campo de keywords mostra um texto informativo dentro */
+     }
+     #editBMPanel_keywordField:focus {
+        background-image: none; /* Texto informativo some se focado */
+     }
+
+    /* Tabs */
+
+        /* Tabs: Remove o scroll de tabs, elas apenas diminuem de tamanho */
+        /* Bom para se ter dezenas de abas abertas */
+        #tabbrowser-tabs .tabbrowser-tab {
+            min-width: initial !important;
+            overflow: hidden !important;
+        }
+
+        /* Tabs: Muda a cor da borda das abas */
+        /* Bom para as distinguir */
+        #tabbrowser-tabs .tabbrowser-tab .tab-background:not([selected]):not([multiselected]) {
+            background-color: #202020 !important;
+        }
+        #tabbrowser-tabs .tabbrowser-tab .tab-background[selected]:not([multiselected]) {
+            outline: 1px solid var(--aesthetic-color) !important;
+        }
+
+        /* Tabs: Impede o botão de som de ser clicado sem a aba estar focada */
+        /* Evita atrapalhar em abas pequenas */
+        #tabbrowser-tabs .tabbrowser-tab[soundplaying]:not([selected]) .tab-icon-stack {
+            pointer-events: none !important;
+        }
+        #tabbrowser-tabs .tabbrowser-tab[activemedia-blocked = "true"]:not([selected]) .tab-icon-stack {
+            pointer-events: none !important;
+        }
+
+    /* Bookmark Bar */
+    
+        /* Bookmark Bar: Cor dos icones de pasta dos favoritos */
+        /* Aesthetics! */
+        #navigator-toolbox .bookmark-item[container] {
+            fill: var(--aesthetic-color) !important;
+        }
+
+        /* Bookmark Bar: Bordas mais escuras */
+        /* Facilita distinguir os menus */
+        #appMenu-popup, #navigator-toolbox menupopup {
+            --panel-border-color: var(--aesthetic-color) !important;
+        }
+
+        /* Bookmark Bar: Opção de abrir todos da pasta removido */
+        /* Não necessário */
+        #navigator-toolbox .bookmarks-actions-menuseparator, #navigator-toolbox .openintabs-menuitem {
+            display: none !important;
+        }
+
+    /* Sidebar */
+
+        /* Sidebar: Cor dos icones dos itens selecionados */
+        /* Aesthetics! */
+        #bookmarks-view .sidebar-placesTreechildren::-moz-tree-image(selected) {
+            fill: var(--aesthetic-color) !important;
+        }
+
+        /* Sidebar: Sidebar flutua acima da página */
+        /* Bom para não ficar "achatando" o site */
+        #sidebar-box {
+            position: absolute;
+            z-index: 1;
+            box-shadow: 5px 0px 15px 5px #00000066;
+            width: 350px !important;
+        }
+        #sidebar-box[positionend = "true"] {
+            right: 0;
+        }
+        #sidebar {
+            min-height: 80vh !important;
+            position: absolute;
+            border-radius: 0 0 0 3px;
+        }
+
+    /* Tabs */
+    
+        /* Tabs: Botão de fechar somente quando sobrevoar a aba */
+        /* Salva espaço e permite fechar abas sem focar nelas */
+        #tabbrowser-tabs .tabbrowser-tab:not([pinned]) .tab-close-button {
+            width: 16px !important;         /* Sempre mesmo tamanho */
+            height: 16px !important;        /* Sempre mesmo tamanho */
+            padding: 2px !important;        /* X menor */
+            margin-right: 0px !important;   /* Hack: Ajusta posição(?) */
+        }
+        /*
+        #tabbrowser-tabs:not([closebuttons = "activetab"]) .tabbrowser-tab:not([pinned]) .tab-close-button {
+            Aba normal = Botão presente, mas escondido
+            display: initial !important;
+            visibility: hidden !important;
+        }
+        #tabbrowser-tabs:not([closebuttons = "activetab"]) .tabbrowser-tab:not([pinned]):hover .tab-close-button {
+            Aba com hover = Botão visível
+            visibility: visible !important;
+        }
+        */ /* É melhor o botão sempre aparecer */
+        #tabbrowser-tabs:not([closebuttons = "activetab"]) .tabbrowser-tab:not([pinned]) .tab-close-button {
+            /* Aba normal = Botão sempre visível */
+            display: initial !important;
+            visibility: visible !important;
+        } /* É melhor o botão sempre aparecer */
+        #tabbrowser-tabs:not([closebuttons = "activetab"]) .tabbrowser-tab[selected = "true"]:not([pinned]) .tab-close-button {
+            /* Aba selecionada = Botão sempre visível */
+            visibility: visible !important;
+        }
+        /* Aba menor do que "browser.tabs.tabClipWidth = 56" = SNAP! */
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button {
+            margin-left: min(-48%, -22px) !important;   /* Hack: Alinha na direita da aba */
+            z-index: 10;                                /* Fica acima do icone */
+            visibility: visible !important;
+            background-color: var(--tabpanel-background-color) !important;
+        }
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button:hover {
+            filter: brightness(200%) !important;
+        }
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button:active {
+            filter: brightness(300%) !important;
+        }
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button {
+            /* Aba(tabClipWidth) normal = Sem botão */
+            display: none !important;
+        }
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]) .tab-close-button {
+            /* Aba(tabClipWidth) selecionado = Sem botão */
+            display: none !important;
+        }
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]):hover .tab-close-button {
+            /* Aba(tabClipWidth) com hover = Com botão */
+            display: initial !important;
+        }
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]):active .tab-close-button {
+            /* Aba(tabClipWidth) selecionado e pressionado(Ex.: Arrastar aba) = Sem botão */
+            display: none !important;
+        }
+        #tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]) .tab-close-button:active {
+            /* Aba(tabClipWidth) selecionado e botão pressionado(Ex.: Fechar aba) = Com botão */
+            display: initial !important;
+        }
+
+        /* Tabs: Espaço antes e depois das abas diminuído */
+        /* Salva espaço */ 
+        #TabsToolbar .titlebar-spacer[type = "pre-tabs"] {
+            border: none !important;
+            width: 32px !important;
+        }
+        #TabsToolbar .titlebar-spacer[type = "post-tabs"] {
+            border: none !important;
+            min-width: 32px !important;
+        }
+
+        /* Tabs: Espaço depois das abas estica */
+        /* Aumenta a área que permite arrastar a janela */
+        /* #TabsToolbar .toolbar-items {
+            max-width: fit-content !important;
+        }
+        #TabsToolbar .titlebar-spacer[type = "post-tabs"] {
+            margin-left: auto !important;
+        } */
+
+/* Popups */
+
+    /* Bookmark Popup */
+
+        /* Bookmark Popup: Adiciona campo com a url para a editar */
+        /* Conveniente para editar favoritos */
+        #editBookmarkPanelContent:has(.editBMPanel_folderRow:not([hidden])) #editBMPanel_locationField {
+            display: unset !important; /* Aparece apenas para favoritos com seletor de local(Não-pastas) */
+        }
+        
+        /* Bookmark Popup: Tamanho maior */
+        /* Conveniente */
+        #editBookmarkPanel {
+            min-width: 500px !important;
+        }
+        #editBMPanel_folderTree {
+            min-height: 350px !important;
+        }
+        
+        /* Bookmark Popup: Sem checkbox */
+        /* Impede uncheque acidental */
+        #editBookmarkPanel_showForNewBookmarks {
+            display: none !important;
+        }
+        
+        /* Bookmark Popup: Sem labels */
+        /* Salva espaço */
+        #editBookmarkPanelContent > label {
+            display: none !important;
+        }
+        #editBookmarkPanelContent > input {
+            margin-bottom: 10px !important;
+        }
+
+    /* Fullscreen Popup */
+
+        /* Fullscreen Popup: Altera o popup de fullscreen */
+        /* Facilita sair do fullscreen */
+        #fullscreen-warning {
+            opacity: 0.8 !important;
+            padding: 5px 10px 5px 10px !important;
+        }
+        #fullscreen-exit-button {
+            visibility: hidden;
+        }
+        #fullscreen-exit-button:after {
+            visibility: visible;
+            display: block;
+            padding: 25px 5px 25px 5px;
+            margin: 0px 0px 10px 0px;
+            content: "ESC";
+            border: solid gray;
+            border-radius: 0px 25px 25px 0px;
+        }
+
+    /* Warn Popup */
+
+        /* Warn Popup: Checkbox da notificação de multiplas abas removido */
+        /* Impede uncheque acidental */
+        #checkboxContainer:has(#checkbox[label = "Confirmar antes de fechar várias abas"]) {
+            display: none !important;
+        }
+
+        /* Warn Popup: Checkbox da notificação de muitas abas a abrir */
+        /* Impede uncheque acidental */
+        #checkboxContainer:has(#checkbox[label = "Avisar que o carregamento de várias abas pode deixar o Firefox lento"]) {
+            display: none !important;
+        }
+
+/* Toolbox */
+
+    /* Toolbox: Itens não importantes removidos */
+    /* Evita acidentes e salva espaço */
+    #context-pocket, #context-savelinktopocket, /* Toolbox: Pocket */
+    #context-sep-setbackground, #context-setDesktopBackground, /* Toolbox: Definir imagem como tela de fundo */
+    #context-sep-sendlinktodevice, #context-sendlinktodevice, /* Toolbox: Enviar link para dispositivo */
+    #sidebar-switcher-tabs, /* Sidebar: Abas sincronizadas */
+    #placesContext_sortBy\:name, /* Bookmark Toolbox: Ordenar por nome */
+    #toggle_PersonalToolbar, #placesContext_newSeparator, /* Bookmark Toolbox: Esconder barra de favoritos */
+    #show-other-bookmarks_PersonalToolbar, /* Bookmark Toolbox: Esconder outros favoritos */
+    #placesContext_showAllBookmarks /* Bookmark Toolbox: Abrir gerenciador de favoritos */
+    {
+        display: none !important;
+    }
+
+
+
+/*
+    + FIX LIST:
+    - Drag funcional de abas em MultiRowTabs
+    - Aviso ao fechar multiplas abas privativas
+*/
+
+
+/* about:config
+
+// Permite mudar a interface com css
+    pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+
+// Permite ter a opção de view compacta nas configurações
+    pref("browser.compactmode.show", true);
+
+// Remove o icone de privado das janelas privadas da barra de tarefa
+    pref("browser.privateWindowSeparation.enabled", false);
+
+// Desativa o Pocket
+    pref("extensions.pocket.enabled", false);
+
+// Diminui o delay do tooltip(Padrão = 500)
+    pref("ui.tooltipDelay", 100);
+
+// Diminui o delay dos submenus(Padrão = 300)
+    pref("ui.submenuDelay", 300);
+
+// Abas:
+
+    // Tamanho mínimo das abas
+        pref("browser.tabs.tabMinWidth", 32);
+
+    // Avisa antes de fechar várias abas
+        pref("browser.tabs.warnOnClose", true);
+
+    // Tamanho das abas antes de esconder detalhes
+        pref("browser.tabs.tabClipWidth", 64);
+
+// Bookmarks:
+
+    // Auto-Exportar bookmarks.html
+        pref("browser.bookmarks.autoExportHTML", true);
+        pref("browser.bookmarks.file", "C:\Users\Yo\Mind Mansion\Bubbled Star\Bookmarks\Mozilla Firefox\bookmarks.html");
+
+    // Máximo de pastas-recentes de bookmarks
+        pref("browser.bookmarks.editDialog.maxRecentFolders", 10);
+
+    // Abre o bookmark, mas não fecha a pasta
+        pref("browser.bookmarks.openInTabClosesMenu", false);
+
+    // Favoritos abertos em outra aba carregam ao fundo
+        pref("browser.tabs.loadBookmarksInBackground", true);
+
+    // Número de abas que podem ser abertas de uma pasta antes de um aviso
+        pref("browser.tabs.maxOpenBeforeWarn", 10);
+
+// Muda a animação da notificação de tela cheia
+    pref("full-screen-api.transition-duration.enter", "0 0");
+    pref("full-screen-api.transition-duration.leave", "0 0");
+    pref("full-screen-api.warning.delay", 0);
+
+// Não inicia videos automaticamente
+    pref("media.autoplay.default", 5);
+
+*/

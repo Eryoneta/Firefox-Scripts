@@ -1,0 +1,22 @@
+/* Window */
+
+    /* Private */
+
+        /* Window: Altera a cor para preto e faz ajustes */
+        @-moz-document url(about:privatebrowsing) {
+            /* Esconde o texto explicativo */
+            .info {
+                display: none !important;
+            }
+            /* Centraliza logotipo e titulo */
+            .logo-and-wordmark {
+                align-items: center !important;
+                display: flex !important;
+                justify-content: center !important;
+                margin-bottom: 49px !important;
+            }
+            /* Muda a cor de fundo */
+            html.private {
+                --in-content-page-background: #1A1A1A !important;
+            }
+        }

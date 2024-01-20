@@ -1,0 +1,6 @@
+chrome/resources/
+chrome/utils/
+chrome/JS/userChrome_ag_css.sys.mjs
+chrome/JS/userChrome_au_css.uc.js
+chrome/CSS/agent_style.uc.css
+chrome/CSS/author_style.uc.css
