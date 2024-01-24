@@ -61,15 +61,18 @@
 	//
 	// NewTabButton
 	// Marca o botão-nova-aba para ser estilizado
-	let onTabOpen = () => {
+	let onTabOperation = () => {
+		setTimeout(() => {
 		const tabsHeight = tabContainer.clientHeight;
 		const tabHeight = tabContainer.getElementsByClassName("tabbrowser-tab")[0].clientHeight;
-		if(tabsHeight > tabHeight) { // É multirow
 			let newTabButton = document.getElementById("tabs-newtab-button");
+			if(tabsHeight > tabHeight) { // É multirow
 			newTabButton.setAttribute("multirow", "");
-		}
+			} else newTabButton.removeAttribute("multirow");
+		}, 50); // Delay para esperar container atualizar tamanho
 	}
-	tabContainer.addEventListener("TabOpen", onTabOpen, false);
+	tabContainer.addEventListener("TabOpen", onTabOperation, false);
+	tabContainer.addEventListener("TabClose", onTabOperation, false);
 	
 	// console.log(tabContainer);
 	
