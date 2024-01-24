@@ -30,7 +30,7 @@
 		let effects = getDropEffectForTabDrag(event);
 		if(effects == "" || effects == "none") {
 			indicator.hidden = true;
-			return;
+			return; // Não ocorre nada
 		}
 		let draggedTab = event.dataTransfer.mozGetDataAt(TAB_DROP_TYPE, 0);
 		if(
@@ -38,13 +38,13 @@
 			tabContainer == draggedTab.container &&
 			!draggedTab._dragData.fromTabList
 		) {
-			indicator.hidden = true;
+			indicator.hidden = true; // Não é link
 			if(!tabContainer._isGroupTabsAnimationOver()) {
 				return;
 			}
 			tabContainer._finishGroupSelectedTabs(draggedTab);
 			if(effects == "move") {
-				animateTabMove(tabContainer, event);
+				animateTabMove(tabContainer, event); // Anima as abas!
 				return;
 			}
 		}
@@ -63,11 +63,11 @@
 	// Marca o botão-nova-aba para ser estilizado
 	let onTabOperation = () => {
 		setTimeout(() => {
-		const tabsHeight = tabContainer.clientHeight;
-		const tabHeight = tabContainer.getElementsByClassName("tabbrowser-tab")[0].clientHeight;
+			const tabsHeight = tabContainer.clientHeight;
+			const tabHeight = tabContainer.getElementsByClassName("tabbrowser-tab")[0].clientHeight;
 			let newTabButton = document.getElementById("tabs-newtab-button");
 			if(tabsHeight > tabHeight) { // É multirow
-			newTabButton.setAttribute("multirow", "");
+				newTabButton.setAttribute("multirow", "");
 			} else newTabButton.removeAttribute("multirow");
 		}, 50); // Delay para esperar container atualizar tamanho
 	}
@@ -283,6 +283,9 @@ function loadCSS() {
 				scrollbar-gutter: auto;
 				scroll-snap-type: y mandatory;
 			}
+			scrollbox[part][orient = "horizontal"] scrollbar[orient = "vertical"] {
+				-moz-window-dragging: no-drag !important; /* Permite usar scrollbar sem arrastar a janela */
+			}
 		}
 		.scrollbox-clip[orient = "horizontal"], #tabbrowser-arrowscrollbox {
 			overflow: -moz-hidden-unscrollable;
@@ -321,12 +324,16 @@ function loadCSS() {
 		#tabbrowser-arrowscrollbox-periphery:has(#tabs-newtab-button[multirow]) { /* Custom prop(multirow)! */
 			margin-left: auto !important;
 		}
+		#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
+			margin-inline-start: 0px !important; /* Remove o espaço entre abas normais e abas fixas */
+		}
 	`;
 	let sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
 	let uri = makeURI('data:text/css;charset=UTF=8,' + encodeURIComponent(css));
 	sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
 }
 
+// Anima as abas arrastadas
 function animateTabMove(tabContainer, event) {
 	// Vars
 	let draggedTab = event.dataTransfer.mozGetDataAt(TAB_DROP_TYPE, 0);
@@ -355,14 +362,12 @@ function animateTabMove(tabContainer, event) {
 		return; // Se não moveu, não faz nada
 	}
 	//   Direção do arraste
-	let movedToRight = (screenX > draggedTab._dragData.animLastScreenX);
-	let movedToBottom = (screenY > draggedTab._dragData.animLastScreenY);
+	let movingToRight = (screenX > draggedTab._dragData.animLastScreenX);
+	let movingToBottom = (screenY > draggedTab._dragData.animLastScreenY);
 	draggedTab._dragData.animLastScreenX = screenX;
 	draggedTab._dragData.animLastScreenY = screenY;
-	//   Abas fixas
-	let isPinned = draggedTab.pinned;
-	let numPinned = tabContainer._lastNumPinned;
-	let tabs = (isPinned ? tabContainer._getVisibleTabs().slice(0, numPinned) : tabContainer._getVisibleTabs().slice(numPinned));
+	//   Abas
+	let tabs = tabContainer._getVisibleTabs();
 	//   Direção da interface
 	if (RTL_UI) {
 		tabs.reverse();
@@ -374,37 +379,67 @@ function animateTabMove(tabContainer, event) {
 	let shiftWidth = tabWidth * movingTabs.length;
 	draggedTab._dragData.tabWidth = tabWidth;
 	draggedTab._dragData.tabHeight= tabHeight;
-	//   Drag
+	//   Drag: Abas
 	let firstTab = tabs[0];
 	let lastTab = tabs[tabs.length - 1];
 	let firstMovingTabScreenX = movingTabs[0].screenX;
 	let firstMovingTabScreenY = movingTabs[0].screenY;
 	let lastMovingTabScreenX = movingTabs[movingTabs.length - 1].screenX;
 	let lastMovingTabScreenY = movingTabs[movingTabs.length - 1].screenY;
+	//   Drag: Posição
 	let translateX = screenX - draggedTab._dragData.screenX;
 	let translateY = screenY - draggedTab._dragData.screenY;
-	if(!isPinned) {
-		translateX += tabContainer.arrowScrollbox.scrollbox.scrollLeft - draggedTab._dragData.scrollX;
-		translateY += tabContainer.arrowScrollbox.scrollbox.scrollTop - draggedTab._dragData.scrollY;
-		//TODO: Mas fixados também ficam no scrollbar! Separar?
-	}
-	let leftBound = firstTab.screenX - firstMovingTabScreenX;
-	let rightBound = lastTab.screenX + lastTab.getBoundingClientRect().width - (lastMovingTabScreenX + tabWidth);
-	let upBound = firstTab.screenY - firstMovingTabScreenY;
-	let bottomBound = lastTab.screenY - firstMovingTabScreenY;
-	// translateX = Math.min(Math.max(translateX, leftBound), rightBound);
-	//TODO: Limitar a área de drag!
+	translateX += tabContainer.arrowScrollbox.scrollbox.scrollLeft - draggedTab._dragData.scrollX;
+	translateY += tabContainer.arrowScrollbox.scrollbox.scrollTop - draggedTab._dragData.scrollY;
+	//   Drag: Limites para o arraste
+	let upTab = findTabAtBound(tabs, "screenY", true);
+	let leftTab = findTabAtBound(tabs, "screenX", true);
+	let rightTab = findTabAtBound(tabs, "screenX", false);
+	let bottomTab = findTabAtBound(tabs, "screenY", false);
+//TODO: Otimizar!
+	let upBound = upTab.screenY - firstMovingTabScreenY;
+	let leftBound = leftTab.screenX - firstMovingTabScreenX;
+	let rightBound = rightTab.screenX + rightTab.getBoundingClientRect().width - (lastMovingTabScreenX + tabWidth);
+	let bottomBound = bottomTab.screenY + bottomTab.getBoundingClientRect().height - (lastMovingTabScreenY + tabHeight);
+	translateX = Math.min(Math.max(translateX, leftBound), rightBound);
+	translateY = Math.min(Math.max(translateY, upBound), bottomBound);
+	//   Drag!
 	for(let tab of movingTabs) {
 		tab.style.transform = `translate(${translateX}px, ${translateY}px)`; // Move a aba com o cursor
 	}
 	draggedTab._dragData.translateX = translateX;
 	draggedTab._dragData.translateY = translateY;
+	function findTabAtBound(tabs = [], varToCompare, smallest = false, lowerIndex = 0, upperIndex = tabs.length - 1, lastIndex = -1) {
+		if(!tabs) return -1;
+		let midIndex = Math.round((lowerIndex + upperIndex) / 2);
+		let isLastCheck = (midIndex == lowerIndex || midIndex == upperIndex);
+		if(lastIndex == -1) lastIndex = midIndex;
+		if(smallest) {
+			if(tabs[midIndex][varToCompare] <= tabs[lastIndex][varToCompare]) {
+				upperIndex = midIndex;
+				lastIndex = midIndex;
+			}
+			if(tabs[midIndex][varToCompare] > tabs[lastIndex][varToCompare]) {
+				lowerIndex = midIndex;
+			}
+		} else {
+			if(tabs[midIndex][varToCompare] >= tabs[lastIndex][varToCompare]) {
+				lowerIndex = midIndex;
+				lastIndex = midIndex;
+			}
+			if(tabs[midIndex][varToCompare] < tabs[lastIndex][varToCompare]) {
+				upperIndex = midIndex;
+			}
+		}
+		if(isLastCheck) return tabs[lastIndex];
+		return findTabAtBound(tabs, varToCompare, smallest, lowerIndex, upperIndex, lastIndex);
+	}
 	//
 	// Anima as outras abas
 	tabs = tabs.filter(tab => !movingTabs.includes(tab) || tab == draggedTab); // Desconsidera abas selecionadas
 	let leftTabCenter = firstMovingTabScreenX + translateX + tabWidth / 2;
 	let rightTabCenter = lastMovingTabScreenX + translateX + tabWidth / 2;
-	let tabCenterX = (movedToRight ? rightTabCenter : leftTabCenter);
+	let tabCenterX = (movingToRight ? rightTabCenter : leftTabCenter);
 	let tabCenterY = firstMovingTabScreenY + translateY + tabHeight / 2;
 	let newIndex = -1;
 	let oldIndex = ("animDropIndex" in draggedTab._dragData ? draggedTab._dragData.animDropIndex : movingTabs[0]._tPos);
@@ -412,7 +447,7 @@ function animateTabMove(tabContainer, event) {
 	let low = 0;
 	let high = tabs.length - 1;
 	while(low <= high) {
-		let mid = Math.floor((low + high) / 2);
+		let mid = Math.round((low + high) / 2);
 		if(tabs[mid] == draggedTab && ++mid > high) {
 			break;
 		}
@@ -434,17 +469,18 @@ function animateTabMove(tabContainer, event) {
 		return;
 	}
 	draggedTab._dragData.animDropIndex = newIndex;
-	for (let tab of tabs) {
-	  if (tab != draggedTab) {
-		let shift = getTabShift(tab, newIndex);
-		tab.style.transform = (shift ? "translateX(" + shift + "px)" : "");
-	  }
+	for(let tab of tabs) {
+		if(tab != draggedTab) {
+			let shift = getTabShift(tab, newIndex);
+			tab.style.transform = (shift ? "translateX(" + shift + "px)" : "");
+			// tab.style.transform = (shift ? `translate(${shift}px, ${0}px)` : ""); // Move a aba com o cursor
+		}
 	}
 	function getTabShift(tab, dropIndex) {
-		if (tab._tPos < draggedTab._tPos && tab._tPos >= dropIndex) {
+		if(tab._tPos < draggedTab._tPos && tab._tPos >= dropIndex) {
 			return (RTL_UI ? -shiftWidth : shiftWidth);
 		}
-		if (tab._tPos > draggedTab._tPos && tab._tPos < dropIndex) {
+		if(tab._tPos > draggedTab._tPos && tab._tPos < dropIndex) {
 			return (RTL_UI ? shiftWidth : -shiftWidth);
 		}
 		return 0;
@@ -477,6 +513,7 @@ function checkFullScreenScrolling() {
 	}
 }
 
+// Define o efeito que o item arrastado causa
 function getDropEffectForTabDrag(event) {
 	let dataTransfer = event.dataTransfer;
 	let isMovingTabs = (dataTransfer.mozItemCount > 0);
@@ -484,7 +521,7 @@ function getDropEffectForTabDrag(event) {
 		for(let i = 0; i < dataTransfer.mozItemCount; i++) {
 			let types = dataTransfer.mozTypesAt(0);
 			if(types[0] != TAB_DROP_TYPE) {
-				isMovingTabs = false;
+				isMovingTabs = false; // Não são abas(Links)
 				break;
 			}
 		}
