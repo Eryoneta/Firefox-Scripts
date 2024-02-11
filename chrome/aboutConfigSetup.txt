@@ -1,0 +1,69 @@
+Em "about:config":
+
+// Permite mudar a interface com css
+    pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+
+// Permite ter a opção de view compacta nas configurações
+    pref("browser.compactmode.show", true);
+
+// Remove o icone de privado das janelas privadas da barra de tarefa
+    pref("browser.privateWindowSeparation.enabled", false);
+
+// Desativa o Pocket
+    pref("extensions.pocket.enabled", false);
+
+// Diminui o delay do tooltip(Padrão = 500)
+    pref("ui.tooltipDelay", 100);
+
+// Diminui o delay dos submenus(Padrão = 300)
+    pref("ui.submenuDelay", 300);
+
+// Abas:
+
+    // Tamanho mínimo das abas
+        pref("browser.tabs.tabMinWidth", 32);
+
+    // Avisa antes de fechar várias abas
+        pref("browser.tabs.warnOnClose", true);
+
+    // Tamanho das abas antes de esconder detalhes
+        pref("browser.tabs.tabClipWidth", 64);
+
+// Bookmarks:
+
+    // Auto-Exportar bookmarks.html
+        pref("browser.bookmarks.autoExportHTML", true);
+        pref("browser.bookmarks.file", "C:\Users\Yo\Mind Mansion\Bubbled Star\Bookmarks\Mozilla Firefox\bookmarks.html");
+
+    // Máximo de pastas-recentes de bookmarks
+        pref("browser.bookmarks.editDialog.maxRecentFolders", 10);
+
+    // Abre o bookmark, mas não fecha a pasta
+        pref("browser.bookmarks.openInTabClosesMenu", false);
+
+    // Favoritos abertos em outra aba carregam ao fundo
+        pref("browser.tabs.loadBookmarksInBackground", true);
+
+    // Número de abas que podem ser abertas de uma pasta antes de um aviso
+        pref("browser.tabs.maxOpenBeforeWarn", 10);
+
+// Muda a animação da notificação de tela cheia
+    pref("full-screen-api.transition-duration.enter", "0 0");
+    pref("full-screen-api.transition-duration.leave", "0 0");
+    pref("full-screen-api.warning.delay", 0);
+
+// Não inicia videos automaticamente
+    pref("media.autoplay.default", 5);
+
+// Audio
+    // Muta o audio apenas com velocidades acima de x16
+        pref("media.audio.playbackrate.muting_threshold", 16);
+
+    // Período para o algoritmo procurar por pontos de corte
+        pref("media.audio.playbackrate.soundtouch_seekwindow_ms", 15);
+
+    // Quanto do audio original é cortado
+        pref("media.audio.playbackrate.soundtouch_sequence_ms", 25);
+
+    // Quanto os audios cortados são sobrepostos na união
+        pref("media.audio.playbackrate.soundtouch_overlap_ms", 28);
