@@ -220,7 +220,7 @@
         #editBookmarkPanelContent > label {
             display: none !important;
         }
-        #editBookmarkPanelContent > input {
+        #editBookmarkPanelContent > input, .editBMPanel_folderRow  {
             margin-bottom: 10px !important;
         }
 
