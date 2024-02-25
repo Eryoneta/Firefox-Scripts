@@ -205,8 +205,8 @@
         #editBookmarkPanel {
             min-width: 500px !important;
         }
-        #editBMPanel_folderTree {
-            min-height: 350px !important;
+        #editBookmarkPanelContent #editBMPanel_folderTree, #editBookmarkPanelContent #editBMPanel_tagsSelector {
+            min-height: 320px !important;
         }
         
         /* Bookmark Popup: Sem checkbox */
@@ -220,7 +220,7 @@
         #editBookmarkPanelContent > label {
             display: none !important;
         }
-        #editBookmarkPanelContent > input, .editBMPanel_folderRow  {
+        #editBookmarkPanelContent > input, #editBookmarkPanelContent .editBMPanel_folderRow, #editBookmarkPanelContent #editBMPanel_newFolderButton {
             margin-bottom: 10px !important;
         }
 
