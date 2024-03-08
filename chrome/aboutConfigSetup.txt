@@ -67,3 +67,6 @@ Em "about:config":
 
     // Quanto os audios cortados são sobrepostos na união
         pref("media.audio.playbackrate.soundtouch_overlap_ms", 28);
+
+// Não auto-completar texto no URL bar
+    pref("browser.urlbar.autoFill", false);
