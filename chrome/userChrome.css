@@ -95,7 +95,11 @@
             position: absolute;
             z-index: 1;
             box-shadow: 5px 0px 15px 5px #00000066;
-            width: 350px !important;
+            min-width: 250px !important;
+            width: 350px;
+            max-width: 90vw !important;
+            resize: horizontal;
+            overflow: auto;
         }
         #sidebar-box[positionend = "true"] {
             right: 0;
