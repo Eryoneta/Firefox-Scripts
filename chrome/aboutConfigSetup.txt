@@ -33,7 +33,7 @@ Em "about:config":
 
     // Auto-Exportar bookmarks.html
         pref("browser.bookmarks.autoExportHTML", true);
-        pref("browser.bookmarks.file", "C:\Users\Yo\Mind Mansion\Bubbled Star\Bookmarks\Mozilla Firefox\bookmarks.html");
+        pref("browser.bookmarks.file", "C:\Users\Yo\Mind Mansion\Bubbled Star\Bookmarks\Mozilla Firefox\Bookmarks\bookmarks.html");
 
     // Máximo de pastas-recentes de bookmarks
         pref("browser.bookmarks.editDialog.maxRecentFolders", 10);
