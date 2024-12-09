@@ -21,7 +21,7 @@
 
     /* Window: Remove o texto indicando "Navegação privada" */
     /* Salva espaço */
-    #private-browsing-indicator-with-label > label {
+    .private-browsing-indicator-with-label > label {
         display: none;
     }
 
