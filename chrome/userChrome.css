@@ -15,9 +15,9 @@
 
     /* Window: Remove o menu que lista todas as tabs */
     /* Salva espaço */
-    #alltabs-button {
+    /*#alltabs-button {
         display: none !important;
-    }
+    }*/
 
     /* Window: Remove o texto indicando "Navegação privada" */
     /* Salva espaço */

@@ -315,9 +315,14 @@ function loadCSS() {
 		#tabbrowser-tabs[hasadjacentnewtabbutton][overflow] > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #tabs-newtab-button {
 			display: flex !important;
 		}
-		#alltabs-button, :root:not([customizing]) #TabsToolbar #new-tab-button, #tabbrowser-arrowscrollbox > spacer, .tabbrowser-tab::after {
+		
+		/*
+		#alltabs-button, 
+		*/
+		:root:not([customizing]) #TabsToolbar #new-tab-button, #tabbrowser-arrowscrollbox > spacer, .tabbrowser-tab::after {
 			display: none !important;
 		}
+		
 		#tabbrowser-tabs .tabbrowser-tab[fadein]:not([pinned]) {
 			width: 220px !important; /* Tamanho normal das abas */
 		}
