@@ -286,6 +286,19 @@ function loadCSS() {
 			scrollbox[part][orient = "horizontal"] scrollbar[orient = "vertical"] {
 				-moz-window-dragging: no-drag !important; /* Permite usar scrollbar sem arrastar a janela */
 			}
+			/* HACK: (v131.0) É necessário selecionar elemento dentro do scroll */
+			/* "Copiar CSS Selector" funciona! Mas como??? */
+			scrollbox[part][orient = "horizontal"]:nth-child(5) > slot:nth-child(1) {
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				overflow-y: auto !important;
+				max-height: calc((var(--tab-min-height) + 2 * var(--tab-block-margin, 0px)) * var(--multirow-n-rows));
+				scrollbar-color: currentColor transparent;
+				scrollbar-width: thin;
+				scrollbar-gutter: auto;
+				scroll-snap-type: y mandatory;
+			}
 		}
 		.scrollbox-clip[orient = "horizontal"], #tabbrowser-arrowscrollbox {
 			overflow: -moz-hidden-unscrollable;
