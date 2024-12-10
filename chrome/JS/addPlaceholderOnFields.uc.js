@@ -11,24 +11,26 @@
 // ==/UserScript==
 
 (function() {
+	// Vars
+	const NAME_FIELD_TEXT = "Nome";
+	const LOCATION_FIELD_TEXT = "Endereço";
+	const KEYWORD_FIELD_TEXT = "Palavra-chave para abrir favoritos da barra de endereços";
+	const TAG_FIELD_TEXT = "Etiquetas, separadas por vírgula";
 
 	// Name
 	let nameFieldElem = document.getElementById("editBMPanel_namePicker");
-	if(nameFieldElem) nameFieldElem.setAttribute("placeholder", "Nome");
+	if(nameFieldElem) nameFieldElem.setAttribute("placeholder", NAME_FIELD_TEXT);
 
 	// Location
 	let locationFieldElem = document.getElementById("editBMPanel_locationField");
-	if(locationFieldElem) locationFieldElem.setAttribute("placeholder", "Endereço");
+	if(locationFieldElem) locationFieldElem.setAttribute("placeholder", LOCATION_FIELD_TEXT);
 
 	// Keywords
 	let keywordsFieldElem = document.getElementById("editBMPanel_keywordField");
-	if(keywordsFieldElem) {
-		keywordsFieldElem.setAttribute("placeholder", "Palavra-chave para abrir favoritos da barra de endereços");
-		keywordsFieldElem.setAttribute("style", "margin-top: 10px !important"); // Apenas style funciona
-	}
+	if(keywordsFieldElem) keywordsFieldElem.setAttribute("placeholder", KEYWORD_FIELD_TEXT);
 
 	// Tags
 	let tagsFieldElem = document.getElementById("editBMPanel_tagsField");
-	if(tagsFieldElem) tagsFieldElem.setAttribute("placeholder", "Etiquetas, separadas por vírgula");
+	if(tagsFieldElem) tagsFieldElem.setAttribute("placeholder", TAG_FIELD_TEXT);
 
 })();
