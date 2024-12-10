@@ -1,0 +1,47 @@
+/* ==UserScript==
+// @name           Bookmark-Properties/Bookmark-Edit: Improve UI
+// @version        1.0.0
+// @include        chrome://browser/content/places/bookmarkProperties.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Apply changes to improve the interface of the edit bookmark panel of BookmarkProperties
+		- Hides the label before the text fields
+		- Hides the text below the text fields
+		- Increases the size of the folder tree menu
+		- Increases the size of the tag selector menu
+	- Recommended to use alongside "../JS/addPlaceholderOnFields.uc.js"
+*//*
+// ==/UserScript== */
+
+:root { /* Vars */
+	--folder-tree-height: 320px;
+	--tag-selector-height: 320px;
+}
+
+#editBookmarkPanelContent > label {
+	display: none !important; /* Hide labels */
+}
+
+#editBookmarkPanelContent .caption-label {
+    display: none !important; /* Hide the text explaining the fields */
+}
+
+#editBookmarkPanelContent #editBMPanel_folderTree {
+	min-height: var(--folder-tree-height) !important; /* Increases the size of the folder tree menu */
+}
+
+#editBookmarkPanelContent #editBMPanel_tagsSelector {
+	min-height: var(--tag-selector-height) !important; /* Increases the size of the tag selector menu */
+}
+
+#editBookmarkPanelContent > input,
+#editBookmarkPanelContent > hbox,
+#editBookmarkPanelContent .editBMPanel_folderRow,
+#editBookmarkPanelContent #editBMPanel_newFolderButton {
+	margin-bottom: 10px !important; /* Adds margin to separate everything */
+}
+#editBookmarkPanelContent #editBMPanel_tagsSelectorRow {
+	padding-top: 0px !important;
+	margin-bottom: 10px !important;
+}

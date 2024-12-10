@@ -3,9 +3,11 @@
 // @version        1.0.0
 // @include        chrome://browser/content/browser.xhtml
 // @include        chrome://browser/content/places/places.xhtml
+// @include        chrome://browser/content/places/bookmarkProperties.xhtml
 // @long-description
 /*
 	- Adds a text inside the text fields of "Name", "Location", "Keyword", and "Tags"
+		- It can't be easily done with CSS as it requires to add a element property
 	- It's useful if the labels are removed with CSS
 */
 // ==/UserScript==
