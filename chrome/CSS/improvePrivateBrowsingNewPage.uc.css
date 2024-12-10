@@ -1,0 +1,28 @@
+/* ==UserScript==
+// @name           Private-Browsing/New-Page: Improve UI
+// @version        1.0.0
+// @include        about:privatebrowsing
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Apply changes to improve the private browsing new-page
+		- Hide unnecessary text
+		- Center logo and title
+		- Change background color to black
+*//*
+// ==/UserScript== */
+
+.info {
+	display: none !important; /* Hide explaining text */
+}
+
+.logo-and-wordmark { /* Center logo e title */
+	align-items: center !important;
+	display: flex !important;
+	justify-content: center !important;
+	margin-bottom: 49px !important;
+}
+
+html.private {
+	--in-content-page-background: #1A1A1A !important; /* Change background color */
+}
