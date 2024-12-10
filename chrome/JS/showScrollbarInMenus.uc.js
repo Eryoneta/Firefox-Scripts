@@ -1,9 +1,8 @@
 // ==UserScript==
-// @name           Menu-Popups: Show Scrollbar
+// @name           Browser/Menus: Show Scrollbar
 // @version        1.0.0
 // @include        chrome://browser/content/browser.xhtml
 // @long-description
-// @description
 /*
 	- Based on https://github.com/Merci-chao/userChrome.js/blob/main/showScrollbarInMenus.uc.js
 	- Adds a scrollbar into popup menus

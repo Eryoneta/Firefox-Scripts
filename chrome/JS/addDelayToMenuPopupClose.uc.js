@@ -1,8 +1,7 @@
 // ==UserScript==
-// @name           Popup Menus: Delayed closure
+// @name           Browser/Menus: Delayed closure
 // @include        chrome://browser/content/browser.xhtml
 // @long-description
-// @description
 /*
 	- Adds a delay before closing popup menus, when dragging a bookmark
 		- By default, all menus simply closes if the bookmark is dragged anywhere outside. That's really annoying!

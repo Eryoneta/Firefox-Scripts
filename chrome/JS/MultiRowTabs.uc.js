@@ -1,9 +1,8 @@
 // ==UserScript==
-// @name           Tabs: MultiRowTabs
+// @name           Browser/Tabs: MultiRowTabs
 // @version        1.0.1
 // @include        chrome://browser/content/browser.xhtml
 // @long-description
-// @description
 /*
 	- Based on https://github.com/Izheil/Quantum-Nox-Firefox-Dark-Full-Theme/blob/master/Multirow%20and%20other%20functions/Multirow%20tabs/MultiRowTab-scrollable.uc.js
 	- Implements tabs in multilines! It even have a vertical scroll

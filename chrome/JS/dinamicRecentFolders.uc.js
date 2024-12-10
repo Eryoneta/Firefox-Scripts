@@ -1,8 +1,7 @@
 // ==UserScript==
-// @name           Edit Bookmark: Dinamic Recent Folders
+// @name           Browser/Edit-Bookmark: Dinamic Recent Folders
 // @include        chrome://browser/content/browser.xhtml
 // @long-description
-// @description
 /*
 	- By default, recent folders area added to the list exactly whe the edit bookmark popup is closed (And the folder is selected to be used)
 		- That is... inconvenient. The list should be updated with the creation or modification of folders as well

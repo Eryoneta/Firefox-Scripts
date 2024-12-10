@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name           Edit-Bookmark: Fields Placeholder
+// @name           (Browser|Places)/Edit-Bookmark: Fields Placeholder
 // @version        1.0.0
-// @include        *
+// @include        chrome://browser/content/browser.xhtml
+// @include        chrome://browser/content/places/places.xhtml
 // @long-description
-// @description
 /*
 	- Adds a text inside the text fields of "Name", "Location", "Keyword", and "Tags"
 	- It's useful if the labels are removed with CSS

@@ -1,9 +1,8 @@
 // ==UserScript==
-// @name           App-Menu: Toggle ExportHTML
+// @name           Browser/Main-Menu: Toggle ExportHTML
 // @version        1.0.0
 // @include        chrome://browser/content/browser.xhtml
 // @long-description
-// @description
 /*
 	- Adds a button into the main menu. It allows to toggle the HTML export of bookmarks
 		- It's necessary to have "browser.bookmarks.file" configured in "about:config"
