@@ -1,21 +1,31 @@
 // ==UserScript==
-// @name           App-Menu: Toggle ExporHTML
-// @version        1.0
+// @name           App-Menu: Toggle ExportHTML
+// @version        1.0.0
+// @include        chrome://browser/content/browser.xhtml
 // @long-description
 // @description
 /*
-	Adiciona botão para configurar export de HTML de favoritos
-	Bom para não exportar desnecessariamente, com cada reinicio
+	- Adds a button into the main menu. It allows to toggle the HTML export of bookmarks
+		- It's necessary to have "browser.bookmarks.file" configured in "about:config"
+		- The script merely toggles "browser.bookmarks.autoExportHTML"
+	- It's useful if you need to restart the browser a bunch of times (To test scripts, for example)
+		- Note: The option only takes effect after a restart! If the option is on, then the export will be executed on exit
 */
 // ==/UserScript==
 
 (function() {
+
+	// Button label
+	ON_LABEL = "Desativar Auto-ExportHTML";
+	OFF_LABEL = "Ativar Auto-ExportHTML";
 	function getLabel() {
 		let autoExportHTML = Services.prefs.getBoolPref("browser.bookmarks.autoExportHTML");
 		if(autoExportHTML) {
-			return "Desativar Auto-ExportHTML";
-		} else return "Ativar Auto-ExportHTML";
+			return ON_LABEL;
+		} else return OFF_LABEL;
 	}
+
+	// Toggle button
 	async function createButton() {
 		const { mainView } = PanelUI;
 		const doc = mainView.ownerDocument;
@@ -25,8 +35,10 @@
 			class: "subviewbutton",
 			label: getLabel(),
 			oncommand: `
+				// Toggles the option
 				let autoExportHTML = !Services.prefs.getBoolPref("browser.bookmarks.autoExportHTML");
 				Services.prefs.setBoolPref("browser.bookmarks.autoExportHTML", autoExportHTML);
+				// Updates button label
 				const { mainView } = PanelUI;
 				const doc = mainView.ownerDocument;
 				const toggleAutoExportHTMLButton = doc.getElementById("appMenu-toggle-exportHTML");
@@ -37,11 +49,14 @@
 		})) {
 			toggleAutoExportHTMLButton.setAttribute(key, val);
 		}
-		const settingsButton =
+		const settingsButton = (
 			doc.getElementById("appMenu-settings-button") ??
-			doc.getElementById("appMenu-preferences-button");
-		settingsButton.after(toggleAutoExportHTMLButton);
+			doc.getElementById("appMenu-preferences-button")
+		);
+		settingsButton.after(toggleAutoExportHTMLButton); // Adds the button after "Settings" or "Preferences"
 	}
+
+	// Adds the button into the menu
 	function init() {
 		PanelMultiView.getViewNode(document, "appMenu-multiView").addEventListener(
 			"ViewShowing",
@@ -49,6 +64,8 @@
 			{ once: true }
 		);
 	}
+
+	// Run
 	if(gBrowserInit.delayedStartupFinished) {
 	  init();
 	} else {
@@ -63,4 +80,5 @@
 			"browser-delayed-startup-finished"
 		);
 	}
+
 })();

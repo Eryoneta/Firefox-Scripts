@@ -1,17 +1,22 @@
 // ==UserScript==
-// @name           Menus: Delay em Popups
-// @version        1.0
+// @name           Popup Menus: Delayed closure
+// @include        chrome://browser/content/browser.xhtml
 // @long-description
 // @description
 /*
-	Adiciona delay antes de popups fecharem, quando arrastando um item
-	Uma necessidade para se poder organizar favoritos com facilidade
+	- Adds a delay before closing popup menus, when dragging a bookmark
+		- By default, all menus simply closes if the bookmark is dragged anywhere outside. That's really annoying!
+		- By having a delay, you have a small forgiving time to drag the bookmark inside the menu without it closing on your face
 */
-// @include        chrome://browser/content/browser.xhtml
+
+// WIP
+// @version        0.0.0
+// @ignorecache
+
 // ==/UserScript==
 
 (function() {
-	//TODO: ...Recriar tudo...? Todo o esquema de popupOpen e popupHide...?
+	// TODO: ...Recriar tudo...? Todo o esquema de popupOpen e popupHide...?
 	return;
 	
 	// VARS

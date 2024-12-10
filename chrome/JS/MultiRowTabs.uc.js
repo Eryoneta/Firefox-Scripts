@@ -1,27 +1,53 @@
 // ==UserScript==
 // @name           Tabs: MultiRowTabs
-// @version        1.0
+// @version        1.0.1
+// @include        chrome://browser/content/browser.xhtml
 // @long-description
 // @description
 /*
-	Baseado em: https://github.com/Izheil/Quantum-Nox-Firefox-Dark-Full-Theme/blob/master/Multirow%20and%20other%20functions/Multirow%20tabs/MultiRowTab-scrollable.uc.js
-	Implementa abas em multilinhas! Abas podem ser livremente arrastadas e reordenadas!
-	Ótimo para se ter várias abas abertas
+	- Based on https://github.com/Izheil/Quantum-Nox-Firefox-Dark-Full-Theme/blob/master/Multirow%20and%20other%20functions/Multirow%20tabs/MultiRowTab-scrollable.uc.js
+	- Implements tabs in multilines! It even have a vertical scroll
+	- Perfect to have tons of open tabs, all visible at once
 */
-// @include        chrome://browser/content/browser.xhtml
 // ==/UserScript==
 
+// TODO: Implement 2D tab drag
+// TODO: Organize everything...
+
 (function() {
+
+	// TODO: Create a "map" to keep tabs in ids and classes used here. They might change in a future update
+
 	// CSS
 	loadCSS();
+
 	// Vars
 	const tabContainer = document.getElementById("tabbrowser-tabs");
 	const browser = window._gBrowser;
-	//
+	
+	// NewTabButton
+	// Marks NewTabButton to be stylized with CSS
+	let onTabOperation = (() => {
+		setTimeout(() => {
+			const tabContainerHeight = tabContainer.clientHeight;
+			const tabHeight = tabContainer.getElementsByClassName("tabbrowser-tab")[0].clientHeight;
+			let newTabButton = document.getElementById("tabs-newtab-button");
+			if(tabContainerHeight > tabHeight) {
+				newTabButton.setAttribute("multirow", ""); // Is in multirow mode
+			} else newTabButton.removeAttribute("multirow"); // Is in single row mode
+		}, 50); // Adds a tiny delay so the animation have time to expand the container
+		// TODO: Does the tab have a listener for when fully opened?
+	});
+	tabContainer.addEventListener("TabOpen", onTabOperation, false);
+	tabContainer.addEventListener("TabClose", onTabOperation, false);
+	
+	return; // TODO
+	
+	// console.log(tabContainer);
+	
 	// DragTab
 	// Controla a aba
 	let onDragOver = (event) => {
-		return;
 		// Impede outros eventos
 		event.preventDefault();
 		event.stopPropagation();
@@ -51,32 +77,13 @@
 		tabContainer._finishAnimateTabMove();
 	};
 	tabContainer.addEventListener("dragover", onDragOver, true);
-	//
+	
 	// DropTab
 	// Posiciona a aba
 	let onDrop = (event) => {
 		//TODO: Quando a aba é solta
 	};
 	tabContainer.addEventListener("drop", onDrop, true);
-	//
-	// NewTabButton
-	// Marca o botão-nova-aba para ser estilizado
-	let onTabOperation = () => {
-		setTimeout(() => {
-			const tabsHeight = tabContainer.clientHeight;
-			const tabHeight = tabContainer.getElementsByClassName("tabbrowser-tab")[0].clientHeight;
-			let newTabButton = document.getElementById("tabs-newtab-button");
-			if(tabsHeight > tabHeight) { // É multirow
-				newTabButton.setAttribute("multirow", "");
-			} else newTabButton.removeAttribute("multirow");
-		}, 50); // Delay para esperar container atualizar tamanho
-	}
-	tabContainer.addEventListener("TabOpen", onTabOperation, false);
-	tabContainer.addEventListener("TabClose", onTabOperation, false);
-	
-	// console.log(tabContainer);
-	
-	return;
 	
 	// MultiRowTab-DropNewTab
 	// Controla o indicador de onde a nova aba é aberta
@@ -105,6 +112,7 @@
 	tabContainer.addEventListener("TabSelect", scrollToView, false);
 	document.addEventListener("SSTabRestoring", scrollToView, false);
 	document.addEventListener("fullscreenchange", checkFullScreenScrolling, false);
+
 	// NewTabButton
 	// Marca o botão-nova-aba para ser estilizada
 	let tabOpen = () => {
@@ -116,6 +124,7 @@
 		}
 	}
 	tabContainer.addEventListener("TabOpen", tabOpen, false);
+
 	// MultiRowTab-DragTab
 	// Controla a aba quando arrastada
 	let hasListeners = false;
@@ -254,6 +263,7 @@
 			}
 		}
 	};
+
 })();
 
 function loadCSS() {
@@ -452,7 +462,7 @@ function animateTabMove(tabContainer, event) {
 		if(isLastCheck) return tabs[lastIndex];
 		return findTabAtBound(tabs, varToCompare, smallest, lowerIndex, upperIndex, lastIndex);
 	}
-	//
+	
 	// Anima as outras abas
 	tabs = tabs.filter(tab => !movingTabs.includes(tab) || tab == draggedTab); // Desconsidera abas selecionadas
 	let leftTabCenter = firstMovingTabScreenX + translateX + tabWidth / 2;

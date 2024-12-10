@@ -1,12 +1,17 @@
 // ==UserScript==
-// @name           Bookmarks: Teste
-// @version        1.0
+// @name           Edit Bookmark: Dinamic Recent Folders
+// @include        chrome://browser/content/browser.xhtml
 // @long-description
 // @description
 /*
-	Teste
+	- By default, recent folders area added to the list exactly whe the edit bookmark popup is closed (And the folder is selected to be used)
+		- That is... inconvenient. The list should be updated with the creation or modification of folders as well
 */
-// @include        chrome://browser/content/browser.xhtml
+
+// WIP
+// @version        0.0.0
+// @ignorecache
+
 // ==/UserScript==
 
 
@@ -19,6 +24,7 @@
 // console.log(gEditItemOverlay);
 
 (function() {
+	// TODO
 	return;
 	
 	PlacesUIUtils.oldShowBookmarkDialog = PlacesUIUtils.showBookmarkDialog;
