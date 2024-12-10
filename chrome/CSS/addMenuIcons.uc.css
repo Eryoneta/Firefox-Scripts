@@ -1,3 +1,15 @@
+/* ==UserScript==
+// @name           All/Menus: Add icons
+// @version        1.0.0
+// @include        *
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Copy of https://gist.github.com/qaz69wsx/83a90423163b65a8344b2e60fc356a58
+	- Implements icons for all menus
+*//*
+// ==/UserScript== */
+
 .subviewbutton:not(.subviewbutton-iconic, [image], .all-tabs-close-button) > image {
   width: 16px;
   height: 16px;

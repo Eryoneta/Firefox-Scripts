@@ -1,0 +1,24 @@
+/* ==UserScript==
+// @name           Browser/Tabs: Resize spaces width
+// @version        1.0.1
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Decreases the width of the spaces before and after the tabs container
+*//*
+// ==/UserScript== */
+
+:root { /* Vars */
+	--width: 32px;
+}
+
+#TabsToolbar .titlebar-spacer[type = "pre-tabs"] {
+	border: none !important;
+	width: var(--width) !important;
+}
+
+#TabsToolbar .titlebar-spacer[type = "post-tabs"] {
+	border: none !important;
+	min-width: var(--width) !important;
+}

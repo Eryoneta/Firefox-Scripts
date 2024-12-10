@@ -1,0 +1,34 @@
+/* ==UserScript==
+// @name           Places/Bookmark-Edit: Improve UI
+// @version        1.0.0
+// @include        chrome://browser/content/places/places.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Apply changes to improve the interface of the edit bookmark panel of Places
+		- Hides the label before the text fields
+		- Hides the text below the text fields
+		- Increases the size of the tag selector menu
+	- Recommended to use alongside "../JS/addPlaceholderOnFields.uc.js"
+*//*
+// ==/UserScript== */
+
+:root { /* Vars */
+	--tag-selector-height: 320px;
+}
+
+#editBookmarkPanelContent > label {
+	display: none !important; /* Hide labels */
+}
+
+#editBookmarkPanelContent .caption-label {
+    display: none !important; /* Hide the text explaining the fields */
+}
+
+#editBookmarkPanelContent {
+	grid-template-columns: 1fr !important; /* Aligns everything into a single column */
+}
+
+#editBookmarkPanelContent #editBMPanel_tagsSelector {
+	min-height: var(--tag-selector-height) !important; /* Increases the size of the tag selector menu */
+}

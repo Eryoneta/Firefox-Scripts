@@ -1,0 +1,15 @@
+/* ==UserScript==
+// @name           Browser(Private-Browsing): Hide label
+// @version        1.0.0
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Hides the text on the side of the private icon
+		- This saves space for tabs
+*//*
+// ==/UserScript== */
+
+.private-browsing-indicator-with-label > label {
+    display: none; /* Hides the text */
+}

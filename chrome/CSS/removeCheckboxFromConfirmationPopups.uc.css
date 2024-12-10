@@ -1,0 +1,15 @@
+/* ==UserScript==
+// @name           CommonDialog/Confirmation-Popup: No checkbox
+// @version        1.0.0
+// @include        chrome://global/content/commonDialog.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Removes the checkbox of the confirmation popup
+	- They exist to warn you about certain actions. The check can be accidentally clicked
+*//*
+// ==/UserScript== */
+
+#commonDialog #dialogGrid #checkboxContainer:has(#checkbox[label]) {
+	display: none !important;
+}

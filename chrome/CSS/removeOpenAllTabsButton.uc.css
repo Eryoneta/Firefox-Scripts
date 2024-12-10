@@ -1,0 +1,16 @@
+/* ==UserScript==
+// @name           Browser/Bookmark-Bar: Remove OpenAllTabs button
+// @version        1.0.0
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Removes the button present at the end of every bookmark folder menu
+	- It can be quite annoying, posing the risk of opening a lot of tabs by accident
+*//*
+// ==/UserScript== */
+
+#navigator-toolbox .bookmarks-actions-menuseparator,
+#navigator-toolbox .openintabs-menuitem {
+	display: none !important; /* Hide button and separator */
+}

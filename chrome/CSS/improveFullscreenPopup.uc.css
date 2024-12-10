@@ -1,0 +1,31 @@
+/* ==UserScript==
+// @name           Browser/Fullscreen-Popup: Improve UI
+// @version        1.0.0
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Apply changes to improve the fullscreen popup
+		- Increases the size
+		- The exit button is simpler and way bigger
+*//*
+// ==/UserScript== */
+
+#fullscreen-warning {
+	opacity: 0.8 !important; /* Transparent */
+	padding: 5px 10px 5px 10px !important; /* Big */
+}
+
+#fullscreen-warning #fullscreen-exit-button {
+	visibility: hidden;
+}
+
+#fullscreen-warning #fullscreen-exit-button:after {
+	visibility: visible;
+	display: block;
+	padding: 25px 5px 25px 5px; /* Big button */
+	margin: 0px 0px 10px 0px;
+	content: "ESC"; /* Text */
+	border: solid gray;
+	border-radius: 0px 25px 25px 0px; /* Semi-round */
+}

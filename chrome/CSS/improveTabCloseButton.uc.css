@@ -1,0 +1,75 @@
+/* ==UserScript==
+// @name           Browser/Tabs: Improve close button behaviour
+// @version        1.0.1
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Apply changes to improve the tab close button
+		- Smaller size
+		- When tabs are bigger, show button
+		- When tabs are smaller, hide button, and only shows when hovering
+		- When tabs are smaller, the button is given a solid background color
+	- Requires "browser.tabs.tabClipWidth = 56" to be set into "about:config"
+		- "browser.tabs.tabClipWidth": Any tabs smaller than "tabClipWidth" shall hide the close button
+*//*
+// ==/UserScript== */
+
+/* Smaller button size */
+#tabbrowser-tabs .tabbrowser-tab:not([pinned]) .tab-close-button {
+	width: 16px !important; /* Smaller */
+	height: 16px !important; /* Smaller */
+	padding: 2px !important; /* Smaller X */
+}
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button {
+	margin-left: -22px !important; /* Hack: Aligns the button inside the tab. Necessary for smaller tabs */
+	z-index: 10; /* Close button above tab icon */
+}
+
+/* Note: `[closebuttons = "activetab"]` means the tabs are smaller than `tabClipWidth` */
+
+/* Big tab = Show close button */
+#tabbrowser-tabs:not([closebuttons = "activetab"]) .tabbrowser-tab:not([pinned]) .tab-close-button {
+	display: initial !important;
+}
+
+/* Big selected tab = Show close button */
+#tabbrowser-tabs:not([closebuttons = "activetab"]) .tabbrowser-tab[selected = "true"]:not([pinned]) .tab-close-button {
+	display: initial !important;
+}
+
+/* Small tab = Hide close button */
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button {
+	display: none !important;
+}
+
+/* Small selected tab = Hide close button */
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]) .tab-close-button {
+	display: none !important;
+}
+
+/* Hovering small selected tab = Show close button */
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]):hover .tab-close-button {
+	display: initial !important;
+}
+
+/* Pressing small selected tab = Hide close button */
+/* So it hides the button when dragging the tab */
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]):active .tab-close-button {
+	display: none !important;
+}
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab[selected = "true"]:not([pinned]) .tab-close-button:active {
+	display: initial !important; /* The button itself shouldn't hide when pressed */
+}
+
+/* Color adjustment */
+/* The default transparent background makes it hard to see the button on small tabs*/
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button {
+	background-color: var(--tabpanel-background-color) !important; /* Solid background */
+}
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button:hover {
+	filter: brightness(200%) !important; /* When hover = Brighter */
+}
+#tabbrowser-tabs[closebuttons = "activetab"] .tabbrowser-tab:not([pinned]) .tab-close-button:active {
+	filter: brightness(300%) !important; /* When pressed = Even more brighter */
+}

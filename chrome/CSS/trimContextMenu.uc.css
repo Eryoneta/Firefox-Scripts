@@ -1,0 +1,45 @@
+/* ==UserScript==
+// @name           Browser/Context-Menu: Remove unnecessary stuff
+// @version        1.0.0
+// @include        chrome://browser/content/browser.xhtml
+// @include        chrome://browser/content/places/places.xhtml
+// @include        chrome://browser/content/places/bookmarksSidebar.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Removes unnecessary options from the many context menus
+*//*
+// ==/UserScript== */
+
+/* Browser: Page Content */
+#context-pocket, /* Pocket */
+#context-savelinktopocket, /* Pocket */
+#context-sep-setbackground, /* Separator */
+#context-setDesktopBackground, /* Set image as background */
+#context-sep-sendlinktodevice, /* Separator */
+#context-sendlinktodevice { /* Send link to device */
+	display: none !important;
+}
+
+/* Browser/Sidebar */
+#sidebar-switcher-tabs { /* Sync tabs between devices menu */
+	display: none !important;
+}
+
+/* Browser/Bookmark-Bar */
+#placesContext_newSeparator, /* Separator */
+#toggle_PersonalToolbar, /* Hide or show bookmark bar */
+#show-other-bookmarks_PersonalToolbar, /* Hide or show other bookmarks */
+#placesContext_showAllBookmarks { /* Open bookmark manager */
+	display: none !important;
+}
+
+/* Places */
+#placesContext_sortBy\:name { /* Sort by name */
+	display: none !important;
+}
+
+/* Bookmarks-Sidebar */
+#placesContext_sortBy\:name { /* Sort by name */
+	display: none !important;
+}

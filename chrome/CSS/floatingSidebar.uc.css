@@ -1,0 +1,37 @@
+/* ==UserScript==
+// @name           Browser/Sidebar: Float on top
+// @version        1.0.1
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Turns the sidebar into a floating panel, one that does not squeezes the page content
+	- It can be resized!
+		- There is a small arrow at the bottom. It can be dragged to resize the panel
+		- Firefox remembers the size, very convenient
+*//*
+// ==/UserScript== */
+
+:root { /* Vars */
+	--min-width: 250px;
+	--max-width: 90vw;
+}
+
+#sidebar-box {
+	position: absolute; /* Floats */
+	z-index: 2147483647; /* ON TOP OF EVERYTHING */
+	box-shadow: 5px 0px 15px 5px #00000066; /* Casts shadow */
+	min-width: var(--min-width) !important;
+	width: 350px; /* Default width */
+	max-width: var(--max-width) !important;
+	overflow: auto; /* Allows for content to overflow */
+	resize: horizontal; /* Content can be resized */
+}
+
+#sidebar-box[positionend] {
+	right: 0; /* Floats at the right side */
+}
+
+#sidebar {
+	min-height: 80vh !important; /* Stretches it all to use the full height */
+}

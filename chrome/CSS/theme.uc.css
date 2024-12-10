@@ -1,0 +1,40 @@
+/* ==UserScript==
+// @name           All/Colors: Set accent color
+// @version        1.1.0
+// @include        *
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Apply a accent color for various things
+*//*
+// ==/UserScript== */
+
+:root { /* Vars */
+	--accent-color: #00BFFF;
+}
+
+/* Browser/Tab: Border of selected tab */
+#tabbrowser-tabs .tabbrowser-tab .tab-background[selected]:not([multiselected]) {
+	outline: 1px solid var(--accent-color) !important;
+}
+
+/* Browser/Bookmark-bar: Bookmark folders icons */
+#navigator-toolbox .bookmark-item[container] {
+	fill: var(--accent-color) !important;
+}
+
+/* Browser/Menus: Menu borders */
+#appMenu-popup,
+#navigator-toolbox menupopup {
+	--panel-border-color: var(--accent-color) !important;
+}
+
+/* Browser/Sidebar: Bookmark folders icons */
+#bookmarks-view treechildren::-moz-tree-image {
+	fill: var(--accent-color) !important;
+}
+
+/* Places: Bookmark folders icons */
+#placesView treechildren::-moz-tree-image {
+	fill: var(--accent-color) !important;
+}

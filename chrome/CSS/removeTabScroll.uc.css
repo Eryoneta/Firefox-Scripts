@@ -1,0 +1,16 @@
+/* ==UserScript==
+// @name           Browser/Tabs: Removes tabs scroll
+// @version        1.0.1
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Removes the scroll that appears when too many tabs are open
+    - All tabs now just decrease in size
+*//*
+// ==/UserScript== */
+
+#tabbrowser-tabs .tabbrowser-tab {
+	min-width: initial !important;
+	overflow: hidden !important;
+}
