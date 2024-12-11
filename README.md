@@ -143,6 +143,16 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
+	<summary><code>showScrollbarInMenus.uc.css</code></summary>
+	<ul>
+		<li>Target: Bookmark menus.</li>
+		<li>Effect: Adds a thin scroll to the menus.</li>
+		<ul>
+			<li>It's very helpful to tell the actual size of the menu.</li>
+		</ul>
+	</ul>
+</details>
+<details>
 	<summary><code>toggleTabSoundOnlyWhenSelected.uc.css</code></summary>
 	<ul>
 		<li>Target: The sound toggle from the tabs.</li>
@@ -175,7 +185,7 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
-	<summary><code>addDelayToMenuPopupClose.uc.js</code></summary>
+	<summary><code>addDelayToMenuPopupClose.uc.js</code> (WIP)</summary>
 	<ul>
 		<li>Target: All menus.</li>
 		<li>Effect: When dragging a item (A bookmark), the menu should stay open for a little bit before closing.</li>
@@ -195,7 +205,7 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
-	<summary><code>dinamicRecentFolders.uc.js</code></summary>
+	<summary><code>dinamicRecentFolders.uc.js</code> (WIP)</summary>
 	<ul>
 		<li>Target: The list of recent bookmark folders.</li>
 		<li>Effect: Creating or editing a bookmark folder adds it to the list of recent folders.</li>
@@ -205,22 +215,12 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
-	<summary><code>multiRowTabs.uc.js</code></summary>
+	<summary><code>multiRowTabs.uc.js</code> (WIP)</summary>
 	<ul>
 		<li>Target: Tabs.</li>
 		<li>Effect: Allows the use of multiple rows of tabs!</li>
 		<ul>
 			<li>It even scrolls vertically!</li>
-		</ul>
-	</ul>
-</details>
-<details>
-	<summary><code>showScrollbarInMenus.uc.j</code></summary>
-	<ul>
-		<li>Target: Bookmark menus.</li>
-		<li>Effect: Adds a thin scroll to the menus.</li>
-		<ul>
-			<li>It's very helpful to tell the actual size of the menu.</li>
 		</ul>
 	</ul>
 </details>
