@@ -1,0 +1,29 @@
+/* ==UserScript==
+// @name           Browser/Menus: Show scrollbar
+// @version        1.1.0
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Based on https://github.com/Merci-chao/userChrome.js/blob/main/showScrollbarInMenus.uc.js
+	- Adds a scrollbar into popup menus
+	- Good to tell the actual size of the thing without having to scroll to the end
+*//*
+// ==/UserScript== */
+
+/* Browser/Menus: Menus scrollbars */
+#navigator-toolbox menupopup::part(arrowscrollbox-scrollbox) {
+	overflow-y: auto !important; /* Shows scrollbar */
+	scrollbar-color: currentColor transparent; /* Thumb and buttons visible and track transparent */
+	scrollbar-width: thin; /* Thin width */
+	scrollbar-gutter: auto; /* Adds extra-width to show the scrollbar only when needed */
+	/* Unfortunadely, currently Firefox does not have a way to create a rounded scrollbar. So, it's a rectangle then */
+}
+
+/*
+- Note: Inside the <menupopup>, there is a #shadow-root. Nothing inside can be accessed, except the elements exposed via [part=ID], by using ::part(ID)
+	- But! Parts inside parts cannot be accessed! For that, is necessary for the part to have a [exportparts=ID]
+- <menupopup> have ::part(arrowscrollbox content), which have ::part(scrollbox), which is unacessible
+	- But ::part(arrowscrollbox content) have [exportparts="scrollbox: arrowscrollbox-scrollbox"], which is perfect for this case
+		- "arrowscrollbox-scrollbox" is a alias for "scrollbox"
+*/
