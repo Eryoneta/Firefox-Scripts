@@ -1,12 +1,12 @@
 /* ==UserScript==
 // @name           All/Colors: Set accent color
-// @version        1.2.0
+// @version        1.2.1
 // @include        *
 // @stylemode      author_sheet
 // @long-description
 /*
 	- Apply a accent color for various things
-	- It also creates a colored window border
+	- It's recommended to be used alongside "./JS/addWindowBorder.uc.js"
 *//*
 // ==/UserScript== */
 
@@ -42,26 +42,10 @@
 }
 
 /* Browser: Colored border */
-#main-window {
-	background-color: black; /* Uh, it is necessary for... the border to be round? Weird */
+/* "#main-window-border" is defined by "addWindowBorder.uc.js" */
+#main-window:-moz-window-inactive #main-window-border { /* Inactive window */
+	border-color: var(--inactive-color);
 }
-#main-window body {
-	padding: 1px;
-	width: calc(100% - 2px);
-	height: calc(100% - 2px);
-}
-#main-window:not([gtktiledwindow]) body { /* For Windows */
-	border-radius: 0px;
-}
-#main-window[gtktiledwindow="true"] body { /* GTK tiled window */
-	border-radius: 0px;
-}
-#main-window[gtktiledwindow="false"] body { /* GTK floating window */
-	border-radius: 12px;
-}
-#main-window:-moz-window-inactive body { /* Inactive window */
-	background-color: var(--inactive-color);
-}
-#main-window:not(:-moz-window-inactive) body { /* Active window */
-	background-color: var(--accent-color);
+#main-window:not(:-moz-window-inactive) #main-window-border { /* Active window */
+	border-color: var(--accent-color);
 }
