@@ -1,0 +1,18 @@
+/* ==UserScript==
+// @name           All/Fonts: Set font size
+// @version        1.0.0
+// @include        *
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Adjusts the font size
+*//*
+// ==/UserScript== */
+
+:root { /* Vars */
+	--textSize: 9pt;
+}
+
+* {
+    font-size: var(--textSize) !important;
+}
