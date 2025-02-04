@@ -1,8 +1,8 @@
 /* ==UserScript==
 // @name           CommonDialog/Confirmation-Popup: No checkbox
-// @version        1.0.0
+// @version        1.0.1
 // @include        chrome://global/content/commonDialog.xhtml
-// @stylemode      author_sheet
+// @stylemode      agent_sheet
 // @long-description
 /*
 	- Removes the checkbox of the confirmation popup

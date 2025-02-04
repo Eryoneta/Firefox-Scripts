@@ -1,8 +1,8 @@
 /* ==UserScript==
 // @name           Private-Browsing/New-Page: Improve UI
-// @version        1.0.0
+// @version        1.0.1
 // @include        about:privatebrowsing
-// @stylemode      author_sheet
+// @stylemode      agent_sheet
 // @long-description
 /*
 	- Apply changes to improve the private browsing new-page
