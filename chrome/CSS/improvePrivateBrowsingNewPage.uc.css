@@ -12,11 +12,11 @@
 *//*
 // ==/UserScript== */
 
-.info {
+html.private div.showPrivate div.info-border div.info {
 	display: none !important; /* Hide explaining text */
 }
 
-.logo-and-wordmark { /* Center logo e title */
+html.private div.showPrivate div.logo-and-wordmark { /* Center logo e title */
 	align-items: center !important;
 	display: flex !important;
 	justify-content: center !important;
