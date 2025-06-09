@@ -135,10 +135,9 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	<summary><code>resizeTabContainerSpaces.uc.css</code></summary>
 	<ul>
 		<li>Target: The space before and after the tabs container.</li>
-		<li>Effect: Removes the scroll.</li>
+		<li>Effect: Reduces the spaces.</li>
 		<ul>
-			<li>Without it, the tabs simply decrease in size.</li>
-			<li>It means that now every tab is visible.</li>
+			<li>With less of it, tabs have more space.</li>
 		</ul>
 	</ul>
 </details>
@@ -185,7 +184,7 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
-	<summary><code>addDelayToMenuPopupClose.uc.js</code> (WIP)</summary>
+	<summary><code>addDelayToMenuPopupClose.uc.js</code><b> (WIP)</b></summary>
 	<ul>
 		<li>Target: All menus.</li>
 		<li>Effect: When dragging a item (A bookmark), the menu should stay open for a little bit before closing.</li>
@@ -205,7 +204,7 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
-	<summary><code>dinamicRecentFolders.uc.js</code> (WIP)</summary>
+	<summary><code>dinamicRecentFolders.uc.js</code><b> (WIP)</b></summary>
 	<ul>
 		<li>Target: The list of recent bookmark folders.</li>
 		<li>Effect: Creating or editing a bookmark folder adds it to the list of recent folders.</li>
@@ -215,7 +214,7 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
-	<summary><code>multiRowTabs.uc.js</code> (WIP)</summary>
+	<summary><code>multiRowTabs.uc.js</code><b> (WIP)</b></summary>
 	<ul>
 		<li>Target: Tabs.</li>
 		<li>Effect: Allows the use of multiple rows of tabs!</li>
