@@ -1,6 +1,6 @@
 /* ==UserScript==
 // @name           Browser/Tabs: Allows toggle of tab sound only when selected
-// @version        1.0.0
+// @version        1.0.1
 // @include        chrome://browser/content/browser.xhtml
 // @stylemode      author_sheet
 // @long-description
@@ -10,10 +10,10 @@
 *//*
 // ==/UserScript== */
 
-#tabbrowser-tabs .tabbrowser-tab[soundplaying]:not([selected]) .tab-icon-stack { /* Sound playing button */
+#tabbrowser-tabs .tabbrowser-tab[soundplaying]:not([selected]) .tab-audio-button { /* Sound playing button */
 	pointer-events: none !important;
 }
 
-#tabbrowser-tabs .tabbrowser-tab[activemedia-blocked]:not([selected]) .tab-icon-stack { /* Sound blocked button */
+#tabbrowser-tabs .tabbrowser-tab[activemedia-blocked]:not([selected]) .tab-audio-button { /* Sound blocked button */
 	pointer-events: none !important;
 }
