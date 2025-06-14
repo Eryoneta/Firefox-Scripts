@@ -1,8 +1,8 @@
 /* ==UserScript==
 // @name           All/Colors: Set accent color
-// @version        1.2.2
+// @version        1.2.3
 // @include        *
-// @stylemode      agent_sheet
+// @stylemode      author_sheet
 // @long-description
 /*
 	- Apply a accent color for various things
@@ -23,6 +23,11 @@
 /* Browser/Bookmark-bar: Bookmark folders icons */
 #navigator-toolbox .bookmark-item[container] {
 	fill: var(--accent-color) !important;
+}
+
+/* Browser/Menus: Menu scrollbar color */
+#navigator-toolbox menupopup::part(arrowscrollbox-scrollbox) {
+	scrollbar-color: var(--accent-color) transparent !important;
 }
 
 /* Browser/Menus: Menu borders */
