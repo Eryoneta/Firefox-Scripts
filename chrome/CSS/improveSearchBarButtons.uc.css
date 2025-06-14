@@ -1,0 +1,21 @@
+/* ==UserScript==
+// @name           Browser/SearchBar: Hide extra buttons
+// @version        1.0.0
+// @include        chrome://browser/content/browser.xhtml
+// @stylemode      author_sheet
+// @long-description
+/*
+	- Set the bookmark icon to be always visible
+		- If the window is small, a "..." button appears. It's meant to show a menu with all the icons
+		- But here, bookmarks stays visible alongside it
+	- Also, hides the PiP icon
+	- This avoids accidental clicks
+*//*
+// ==/UserScript== */
+
+#navigator-toolbox #urlbar #picture-in-picture-button {
+	display: none;
+}
+#navigator-toolbox #urlbar #star-button-box {
+	display: flex;
+}

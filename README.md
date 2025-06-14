@@ -77,6 +77,16 @@ Following the instructions, there should be a `chrome` directory inside the targ
 	</ul>
 </details>
 <details>
+	<summary><code>improveSearchBarButtons.uc.css</code></summary>
+	<ul>
+		<li>Target: The bookmark and PiP icons inside search bar.</li>
+		<li>Effect: Hides the PiP icon, and makes the bookmark icon always visible.</li>
+		<ul>
+			<li>This avoids accidental clicks, when aiming to bookmark a page.</li>
+		</ul>
+	</ul>
+</details>
+<details>
 	<summary><code>improveTabCloseButton.uc.css</code></summary>
 	<ul>
 		<li>Target: The close buttons from the tabs.</li>
