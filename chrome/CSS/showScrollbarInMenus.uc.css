@@ -1,6 +1,6 @@
 /* ==UserScript==
 // @name           Browser/Menus: Show scrollbar
-// @version        1.1.0
+// @version        1.1.1
 // @include        chrome://browser/content/browser.xhtml
 // @stylemode      author_sheet
 // @long-description
@@ -15,9 +15,8 @@
 #navigator-toolbox menupopup::part(arrowscrollbox-scrollbox) {
 	overflow-y: auto !important; /* Shows scrollbar */
 	scrollbar-color: currentColor transparent; /* Thumb and buttons visible and track transparent */
-	scrollbar-width: thin; /* Thin width */
+	scrollbar-width: auto; /* Width */
 	scrollbar-gutter: auto; /* Adds extra-width to show the scrollbar only when needed */
-	/* Unfortunadely, currently Firefox does not have a way to create a rounded scrollbar. So, it's a rectangle then */
 }
 
 /*
