@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser/Main-Menu: Toggle ExportHTML
-// @version        1.0.0
+// @version        1.0.1
 // @include        chrome://browser/content/browser.xhtml
 // @long-description
 /*
@@ -18,60 +18,55 @@
 	ON_LABEL = "Desativar Auto-ExportHTML";
 	OFF_LABEL = "Ativar Auto-ExportHTML";
 	function getLabel() {
-		let autoExportHTML = Services.prefs.getBoolPref("browser.bookmarks.autoExportHTML");
+		const autoExportHTML = Services.prefs.getBoolPref("browser.bookmarks.autoExportHTML");
 		if(autoExportHTML) {
 			return ON_LABEL;
 		} else return OFF_LABEL;
 	}
 
+	// Button action
+	function doAction() {
+		// Toggles the option
+		const autoExportHTML = Services.prefs.getBoolPref("browser.bookmarks.autoExportHTML");
+		Services.prefs.setBoolPref("browser.bookmarks.autoExportHTML", !autoExportHTML);
+		// Updates button label
+		const doc = PanelUI.mainView.ownerDocument;
+		const toggleAutoExportHTMLButton = doc.getElementById("appMenu-toggle-autoExportHTML");
+		toggleAutoExportHTMLButton.setAttribute("label", getLabel());
+	}
+
 	// Toggle button
-	async function createButton() {
-		const { mainView } = PanelUI;
-		const doc = mainView.ownerDocument;
+	async function buildButton() {
+		const doc = PanelUI.mainView.ownerDocument;
 		const toggleAutoExportHTMLButton = doc.createXULElement("toolbarbutton");
-		for (const [key, val] of Object.entries({
-			id: "appMenu-toggle-exportHTML",
-			class: "subviewbutton",
-			label: getLabel(),
-			oncommand: `
-				// Toggles the option
-				let autoExportHTML = !Services.prefs.getBoolPref("browser.bookmarks.autoExportHTML");
-				Services.prefs.setBoolPref("browser.bookmarks.autoExportHTML", autoExportHTML);
-				// Updates button label
-				const { mainView } = PanelUI;
-				const doc = mainView.ownerDocument;
-				const toggleAutoExportHTMLButton = doc.getElementById("appMenu-toggle-exportHTML");
-				if(autoExportHTML) {
-					toggleAutoExportHTMLButton.setAttribute("label", "Desativar Auto-ExportHTML");
-				} else toggleAutoExportHTMLButton.setAttribute("label", "Ativar Auto-ExportHTML");
-			`,
-		})) {
-			toggleAutoExportHTMLButton.setAttribute(key, val);
-		}
+		toggleAutoExportHTMLButton.setAttribute("id", "appMenu-toggle-autoExportHTML");
+		toggleAutoExportHTMLButton.setAttribute("class", "subviewbutton");
+		toggleAutoExportHTMLButton.setAttribute("label", getLabel());
+		toggleAutoExportHTMLButton.addEventListener("command", doAction);
+		// Note: For security, it cannot be a inline "oncommand"
 		const settingsButton = (
-			doc.getElementById("appMenu-settings-button") ??
-			doc.getElementById("appMenu-preferences-button")
+			doc.getElementById("appMenu-settings-button") ?? doc.getElementById("appMenu-preferences-button")
 		);
 		settingsButton.after(toggleAutoExportHTMLButton); // Adds the button after "Settings" or "Preferences"
 	}
 
 	// Adds the button into the menu
-	function init() {
+	function initButton() {
 		PanelMultiView.getViewNode(document, "appMenu-multiView").addEventListener(
 			"ViewShowing",
-			createButton,
+			buildButton,
 			{ once: true }
 		);
 	}
 
 	// Run
 	if(gBrowserInit.delayedStartupFinished) {
-	  init();
+	  initButton();
 	} else {
 		let delayedListener = (subject, topic) => {
 			if (topic == "browser-delayed-startup-finished" && subject == window) {
 				Services.obs.removeObserver(delayedListener, topic);
-				init();
+				initButton();
 			}
 		};
 		Services.obs.addObserver(
